@@ -1,6 +1,7 @@
 package campus.tech.kakao.map
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
 import com.kakao.vectormap.KakaoMapSdk
 import dagger.hilt.android.HiltAndroidApp
 

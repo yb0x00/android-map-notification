@@ -21,7 +21,9 @@ import com.kakao.vectormap.label.LabelStyles
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import campus.tech.kakao.map.data.firebase.RemoteConfig
 import campus.tech.kakao.map.databinding.MapDetailBottomSheetBinding
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeMapActivity : AppCompatActivity() {
