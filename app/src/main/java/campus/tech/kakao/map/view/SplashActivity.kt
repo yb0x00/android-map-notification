@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import campus.tech.kakao.map.R
 import campus.tech.kakao.map.databinding.ActivitySplashBinding
 import campus.tech.kakao.map.viewModel.SplashViewModel
@@ -14,26 +15,33 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
-    private val bootViewModel: SplashViewModel by viewModels()
+    private val splashViewModel: SplashViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
         setBinding()
+        splashViewModel.fetchServiceState()
+        setScreen()
 
-        if (bootViewModel.databaseState.toString() != "ON_SERVICE"){
-            navigateToHomeMapActivity()
-        } else{
-            binding.serviceMsg.text = getString(R.string.boot_error)
-        }
     }
 
-    private fun setBinding(){
+    private fun setBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
     }
 
-    private fun navigateToHomeMapActivity(){
+    private fun setScreen() {
+        splashViewModel.navigateToHome.observe(this, Observer { navigateToHome ->
+            if (navigateToHome) {
+                navigateToHomeMapActivity()
+            } else {
+                
+            }
+        })
+    }
+
+    private fun navigateToHomeMapActivity() {
         val intent = Intent(this, HomeMapActivity::class.java)
         startActivity(intent)
     }
