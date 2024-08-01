@@ -22,6 +22,7 @@ class SplashActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
         setBinding()
+        setViewModel()
         splashViewModel.fetchServiceState()
         setScreen()
 
@@ -31,12 +32,15 @@ class SplashActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
     }
 
+    private fun setViewModel() {
+        binding.lifecycleOwner = this
+        binding.viewModel = splashViewModel
+    }
+
     private fun setScreen() {
         splashViewModel.navigateToHome.observe(this, Observer { navigateToHome ->
             if (navigateToHome) {
                 navigateToHomeMapActivity()
-            } else {
-
             }
         })
     }

@@ -16,6 +16,9 @@ class SplashViewModel @Inject constructor(
     private val _navigateToHome = MutableLiveData<Boolean>()
     val navigateToHome: LiveData<Boolean> get() = _navigateToHome
 
+    private val _errorMsg = MutableLiveData<String>()
+    val errorMsg: LiveData<String> get() = _errorMsg
+
     fun fetchServiceState() {
         splashRepository.getServiceState { serviceState ->
             if (serviceState == "ON_SERVICE") {
@@ -24,6 +27,7 @@ class SplashViewModel @Inject constructor(
             } else {
                 Log.d("yeong", "ViewModel: 에러")
                 _navigateToHome.value = false
+                _errorMsg.value = splashRepository.getErrorMsg()
             }
         }
     }

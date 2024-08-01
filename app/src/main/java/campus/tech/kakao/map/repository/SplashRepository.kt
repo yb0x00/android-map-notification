@@ -20,7 +20,12 @@ class SplashRepository @Inject constructor(
         }
     }
 
+    fun getErrorMsg(): String {
+        return remoteConfig.getData(SERVICE_MESSAGE_KEY)
+    }
+
     companion object {
         const val SERVICE_STATE_KEY = "serviceState"
+        const val SERVICE_MESSAGE_KEY = "serviceMessage"
     }
 }
