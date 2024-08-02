@@ -35,7 +35,18 @@ class SplashActivity : AppCompatActivity() {
         setViewModel()
 
         askNotificationPermission()
+        //getFcmToken()
     }
+
+    /*private fun getFcmToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (it.isSuccessful) {
+                Log.d("yeong","token: ${it.result}")
+                return@addOnCompleteListener
+            }
+        }
+    }*/
+
 
     private fun setBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)

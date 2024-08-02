@@ -31,6 +31,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        resValue("string", "fcm_default_channel_id", getApiKey("FCM_DEFAULT_CHANNEL_ID"))
         resValue("string", "kakao_api_key", getApiKey("KAKAO_API_KEY"))
         buildConfigField("String", "KAKAO_REST_API_KEY", getApiKey("KAKAO_REST_API_KEY"))
     }
@@ -56,9 +57,7 @@ android {
         dataBinding = true
         buildConfig = true
     }
-}
-
-fun getApiKey(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key)
+}fun getApiKey(key: String): String = gradleLocalProperties(rootDir, providers).getProperty(key)
 
 dependencies {
 
