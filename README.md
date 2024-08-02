@@ -7,6 +7,7 @@
 - serviceState 값이 ON_SERVICE이 아닌 경우에는 serviceMessage 값을 초기 진입 화면 하단에 표시하고 지도 화면으로 진입하지 않음
 
 [step2]
+- 알림 권한 설정
 - Firebase Cloud Message 설정
 - 앱이 백그라운드 상태일 경우 FCM 기본 값을 사용하여 Notification을 발생
 - 앱이 포그라운드 상태일 경우 커스텀 Notification을 발생
