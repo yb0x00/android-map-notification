@@ -2,10 +2,13 @@ package campus.tech.kakao.map.data.firebase
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import campus.tech.kakao.map.R
+import campus.tech.kakao.map.view.SplashActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -15,6 +18,15 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         createNotificationChannel()
+        val intent = Intent(this, SplashActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
         val builder = NotificationCompat.Builder(
             this,
             CHANNEL_ID
@@ -23,6 +35,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
             .setContentTitle(getString(R.string.myNotification_title))
             .setContentText(getString(R.string.myNotification_body))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
             .setStyle(
                 NotificationCompat.BigTextStyle()
                     .bigText("앱이 실행 중일 때는 포그라운드 알림이 발생합니다.")
