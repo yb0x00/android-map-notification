@@ -61,5 +61,4 @@ class HomeMapActivityTest {
             .perform(click())
         intended(hasComponent(DataSearchActivity::class.java.name))
     }
-
 }
