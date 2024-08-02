@@ -38,7 +38,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
             .setContentIntent(pendingIntent)
             .setStyle(
                 NotificationCompat.BigTextStyle()
-                    .bigText("앱이 실행 중일 때는 포그라운드 알림이 발생합니다.")
+                    .bigText(getString(R.string.notification_big_text))
             )
             .setAutoCancel(true)
 

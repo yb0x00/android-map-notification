@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,6 +21,7 @@ import androidx.lifecycle.Observer
 import campus.tech.kakao.map.R
 import campus.tech.kakao.map.databinding.ActivitySplashBinding
 import campus.tech.kakao.map.viewModel.SplashViewModel
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +43,6 @@ class SplashActivity : AppCompatActivity() {
     /*private fun getFcmToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
             if (it.isSuccessful) {
-                Log.d("yeong","token: ${it.result}")
                 return@addOnCompleteListener
             }
         }
@@ -108,10 +109,7 @@ class SplashActivity : AppCompatActivity() {
         AlertDialog.Builder(this@SplashActivity).apply {
             setTitle(getString(R.string.ask_notification_permission_dialog_title))
             setMessage(
-                String.format(
-                    "\n권한을 허용하시면, 다양한 알림 소식을 받으실 수 있습니다.\n(알림에서 %s의 알림 권한을 허용해주세요.)",
-                    getString(R.string.app_name)
-                )
+                getString(R.string.notification_dialog_text, getString(R.string.app_name))
             )
             setPositiveButton(getString(R.string.accept_notification_permission)) { _, _ ->
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -133,7 +131,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun handleAppExit() {
         Toast.makeText(
-            this@SplashActivity, "앱을 사용하기 위해 알림 권한이 필요합니다. 권한을 허용해주세요!",
+            this@SplashActivity, getString(R.string.exit_message),
             Toast.LENGTH_SHORT
         ).show()
         Handler(Looper.getMainLooper()).postDelayed({
