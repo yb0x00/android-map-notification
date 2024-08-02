@@ -3,9 +3,9 @@ package campus.tech.kakao.map.view
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import campus.tech.kakao.map.R
 import campus.tech.kakao.map.databinding.ActivityMapErrorBinding
 import campus.tech.kakao.map.viewModel.MapErrorViewModel
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MapErrorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMapErrorBinding
-    private lateinit var viewModel: MapErrorViewModel
+    private val viewModel: MapErrorViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,6 @@ class MapErrorActivity : AppCompatActivity() {
     }
 
     private fun setViewModel() {
-        viewModel = ViewModelProvider(this)[MapErrorViewModel::class.java]
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
     }
